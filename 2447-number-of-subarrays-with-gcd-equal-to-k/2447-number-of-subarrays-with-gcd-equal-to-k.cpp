@@ -9,7 +9,7 @@ public:
                 
                 gcd = getGCD(gcd,nums[j]);
                 if(gcd == k)res++;
-                
+                if(gcd < k or gcd % k != 0)break;
             }
         }
         
