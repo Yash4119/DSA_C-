@@ -1,29 +1,58 @@
 class Solution {
 public:
+    
+    bool isPal(string s){
+        int st=0;
+        int e=s.size()-1;
+        
+        while(st<e){
+            if(s[st]!=s[e])return false;
+            st++;
+            e--;
+        }
+        
+        return true;
+    }
+    
     int longestPalindrome(vector<string>& words) {
+        unordered_map<string,int>mp;
+        int len=0;
         
-       int count[26][26] = {}; 
-       int ans =0;
+        for(int i=0;i<words.size();i++){
+            mp[words[i]]++;
+            if(isPal(words[i]))continue;
+            
+            string temp = words[i];
+            reverse(temp.begin(),temp.end());
+            
+            if(mp[temp] > 0){
+                len += 4;
+                mp[temp]--;
+                mp[words[i]]--;
+            }
+            
+        }
         
-			for(auto w : words){
-				int a = w[0] - 'a';
-				int b = w[1] - 'a'; 
-
-				if(count[b][a]){
-					ans+= 4;          
-					count[b][a]--;   // decrement the count as we found mirror word
-				}else
-					count[a][b]++;  //increment the current word count if we not find any mirror word
-			}
+        int ct1=0;
+        int calc=0;
+        bool flag=false;
+        for(auto it:mp){
+            if(isPal(it.first)){
+                if(it.second==1){
+                    ct1++;
+                }
+                else if(it.second%2==0){
+                    calc += ((it.second)*2);
+                }
+                else{
+                    calc += ((it.second-1)*2);
+                    flag = true;
+                }
+            }
+        }
         
-			for(int i=0;i<26;i++){
-				if(count[i][i]){
-					ans+=2;
-					break;
-				}
-			 }
-      
-	return ans;
-         
+        if(ct1>=1 || flag)len += 2;
+        
+        return len+calc;
     }
 };
