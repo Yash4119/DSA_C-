@@ -1,23 +1,24 @@
 class Solution {
     public int hIndex(int[] citations) {
         int n = citations.length;
-        int arr [] = new int[n+1];
         
-        for(int it:citations){
-            if(it>=n){
-                arr[n]++;
-            }
-            else{
-                arr[it]++;
-            }
-        }
+        if(n==0)return n;
         
-        int total=0;
-        for(int i=n;i>=0;i--){
-            total += arr[i];
-            if(total >= i)return i;
-        }
+//         int arr [] = new int[n+1];
         
-        return n;
+//         for(int it:citations){
+//             if(it>=n){
+//                 arr[n]++;
+//             }
+//             else{
+//                 arr[it]++;
+//             }
+//         }
+        
+       for(int i=0;i<n;i++){
+           if(citations[i] >= n-i)return n-i;
+       }
+        
+        return 0;
     }
 }
