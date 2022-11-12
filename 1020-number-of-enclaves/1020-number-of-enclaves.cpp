@@ -7,8 +7,6 @@ public:
             return;
         }
         
-        // cout<<i<<" "<<j<<endl;
-        
         grid[i][j] = -1;
         
         helper(grid,i+1,j);
@@ -22,8 +20,6 @@ public:
         
         int m = grid.size();
         int n = grid[0].size();
-        
-        // cout<<m<<" "<<n<<endl;
         
         vector<vector<int>>dp(m,vector<int>(n,0));
         
@@ -45,15 +41,15 @@ public:
             }
         }
         
-        int maxi = 0;
+        int count = 0;
         
         for(int i=0;i<=m-1;i++){
             for(int j=0;j<=n-1;j++){
-                if(grid[i][j] == 1)maxi++;
+                if(grid[i][j] == 1)count++;
             }
         }
         
-        return maxi;
+        return count;
     }
 };
 
