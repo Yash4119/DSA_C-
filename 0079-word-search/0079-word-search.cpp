@@ -9,16 +9,17 @@ public:
         }
         // bool u=false,l=false,d=false,r=false;
         
-        if(i<0 or i>=board.size() or j<0 or j>=board[0].size() or board[i][j]!=word[ind] or dp[i][j])
+        if(i<0 or i>=board.size() or j<0 or j>=board[0].size() or board[i][j]!=word[ind] or board[i][j]=='.')
             return false;
         
-        dp[i][j] = 1;
+        char ch = board[i][j];
+        board[i][j] = '.';
         
         int d = solve(board,dp,word,temp,i+1,j,ind+1);
         int u = solve(board,dp,word,temp,i-1,j,ind+1);
         int l = solve(board,dp,word,temp,i,j-1,ind+1);
         int r = solve(board,dp,word,temp,i,j+1,ind+1);
-        dp[i][j]=0;
+        board[i][j]=ch;
         return u or l or r or d;
     }
     
