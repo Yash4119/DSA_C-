@@ -21,9 +21,9 @@ public:
             return false;
         }
         
-        int temp = nums.back();
-        mp[temp] = mp[val];
-        nums[mp[val]] = temp;
+        int last = nums.back();
+        mp[last] = mp[val];
+        nums[mp[val]] = last;
         nums.pop_back();
         mp.erase(val);
         return true;
