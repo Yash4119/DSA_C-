@@ -1,0 +1,37 @@
+class Solution {
+public:
+    
+    void solve(vector<vector<int>>graph,vector<vector<int>>&ans,vector<int>&temp,vector<int>&vis,int node){
+        // vis[node] = 1;
+        temp.push_back(node);
+        if(node==graph.size()-1){
+            ans.push_back(temp);
+            return;
+        }
+        
+        for(auto it:graph[node]){
+            if(!vis[it]){
+                vis[it]=1;
+                
+                solve(graph,ans,temp,vis,it);
+                temp.pop_back();
+                vis[it]=0;
+            }
+            
+        }
+        
+    }
+    
+    vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& graph) {
+        vector<vector<int>>ans;
+        if(graph.size()==0)return ans;
+        
+        vector<int>temp;
+        vector<int>vis(graph.size(),0);
+        
+        solve(graph,ans,temp,vis,0);
+        
+        return ans;
+        
+    }
+};
